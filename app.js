@@ -1,36 +1,36 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const squares = document.querySelectorAll('.grid div');
-  const result = document.querySelector('#result');
-  const displayCurrentPlayer = document.querySelector('#current-player');
-  let currentPlayer = 1;
+  const squares = document.querySelectorAll('.grid div')
+  const result = document.querySelector('#result')
+  const displayCurrentPlayer = document.querySelector('#current-player')
+  let currentPlayer = 1
 
-  for (var i = 0, len = squares.length; i < len; i++)
-
-  (function(index) {
+  for (var i = 0, len = squares.length; i < len; i++) {
+    (function (index) {
     // add an onclikc to each square in your grid
-    squares[i].onclick = function() {
+      squares[i].onclick = function () {
       // if the square belowyour current square is take, you can go ontop of it
-      if (squares[index + 7].classList.contains('taken')) {
-        if (currentPlayer === 1) {
-          squares[index].classList.add('taken');
-          squares[index].classList.add('player-one');
-          // change the player
-          currentPlayer = 2;
-          displayCurrentPlayer.innerHTML = currentPlayer;
-        } else if (currentPlayer === 2) {
-          squares[index].classList.add('taken');
-          squares[index].classList.add('player-two');
-          // change the player
-          currentPlayer = 1;
-          displayCurrentPlayer.innerHTML = currentPlayer;
-        }
-        // if the square below your current square is not taken, you can't got here
-      } else alert("Can't go here")
-    }
-  })(i)
+        if (squares[index + 7].classList.contains('taken')) {
+          if (currentPlayer === 1) {
+            squares[index].classList.add('taken')
+            squares[index].classList.add('player-one')
+            // change the player
+            currentPlayer = 2
+            displayCurrentPlayer.innerHTML = currentPlayer
+          } else if (currentPlayer === 2) {
+            squares[index].classList.add('taken')
+            squares[index].classList.add('player-two')
+            // change the player
+            currentPlayer = 1
+            displayCurrentPlayer.innerHTML = currentPlayer
+          }
+          // if the square below your current square is not taken, you can't got here
+        } else alert("Can't go here")
+      }
+    })(i)
+  }
 
   // check th board for a win or lose
-  function checkBoard() {
+  function checkBoard () {
     const winningArrays = [
       [0, 1, 2, 3], [41, 40, 39, 38], [7, 8, 9, 10], [34, 33, 32, 31],
       [14, 15, 16, 17], [27, 26, 25, 24], [21, 22, 23, 24], [20, 19, 18, 17],
@@ -45,19 +45,19 @@ document.addEventListener('DOMContentLoaded', () => {
       [37, 31, 25, 19], [4, 10, 16, 22], [2, 10, 18, 26], [39, 31, 23, 15],
       [1, 9, 17, 25], [40, 32, 24, 16], [9, 7, 25, 33], [8, 16, 24, 32],
       [11, 7, 23, 29], [12, 18, 24, 30], [1, 2, 3, 4], [5, 4, 3, 2],
-      [8, 9, 10, 11],[12, 11, 10, 9], [15, 16, 17, 18], [19, 18, 17, 16],
+      [8, 9, 10, 11], [12, 11, 10, 9], [15, 16, 17, 18], [19, 18, 17, 16],
       [22, 23, 24, 25], [26, 25, 24, 23], [29, 30, 31, 32], [33, 32, 31, 30],
-      [36, 37, 38, 39], [40, 39, 38, 37], [7, 14, 21, 28],[8, 15, 22, 29],
+      [36, 37, 38, 39], [40, 39, 38, 37], [7, 14, 21, 28], [8, 15, 22, 29],
       [9, 16, 23, 30], [10, 17, 24, 31], [11, 18, 25, 32], [12, 19, 26, 33],
-      [13, 20, 27, 34],
-    ];
+      [13, 20, 27, 34]
+    ]
 
     // now take the 4 values in each winningArrays and plug the into the squares
     for (let y = 0; y < winningArrays.length; y++) {
-      const square1 = squares[winningArrays[y][0]];
-      const square2 = squares[winningArrays[y][1]];
-      const square3 = squares[winningArrays[y][2]];
-      const square4 = squares[winningArrays[y][3]];
+      const square1 = squares[winningArrays[y][0]]
+      const square2 = squares[winningArrays[y][1]]
+      const square3 = squares[winningArrays[y][2]]
+      const square4 = squares[winningArrays[y][3]]
 
       // now check those arrays to see if the all have the class of player-one
       if (
@@ -65,16 +65,13 @@ document.addEventListener('DOMContentLoaded', () => {
         square2.classList.contains('player-one') &&
         square3.classList.contains('player-one') &&
         square4.classList.contains('player-one')) {
-          result.innerHTML = 'Player One Wins!'
-      }
-
-      // now check those arrays to see if the all have the class of player-two
-      else if (
+        result.innerHTML = 'Player One Wins!'
+      } else if ( // now check those arrays to see if the all have the class of player-two
         square1.classList.contains('player-two') &&
         square2.classList.contains('player-two') &&
         square3.classList.contains('player-two') &&
         square4.classList.contains('player-two')) {
-          result.innerHTML = 'Player Two Wins!'
+        result.innerHTML = 'Player Two Wins!'
       }
     }
   }
