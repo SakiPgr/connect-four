@@ -1,14 +1,32 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const squares = document.querySelectorAll('.grid div')
+  // const squares = document.querySelectorAll('.grid div')
   const result = document.querySelector('#result')
   const displayCurrentPlayer = document.querySelector('#current-player')
+  const square = document.querySelector('.grid')
   let currentPlayer = 1
+
+  function addDivs () {
+    for (let i = 0; i < 49; i++) {
+      if (i < 42) {
+        const div = document.createElement('div')
+        square.appendChild(div)
+      } else {
+        const div = document.createElement('div')
+        div.classList.add('taken')
+        square.appendChild(div)
+      }
+    }
+  }
+
+  addDivs()
+
+  const squares = document.querySelectorAll('.grid div')
 
   for (var i = 0, len = squares.length; i < len; i++) {
     (function (index) {
     // add an onclikc to each square in your grid
       squares[i].onclick = function () {
-      // if the square belowyour current square is take, you can go ontop of it
+      // if the square below your current square is take, you can go ontop of it
         if (squares[index + 7].classList.contains('taken')) {
           if (currentPlayer === 1) {
             squares[index].classList.add('taken')
